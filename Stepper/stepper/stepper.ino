@@ -13,51 +13,37 @@ void setup() {
   // put your setup code here, to run once:
   pinMode(DRIVER_D,OUTPUT);
   pinMode(PWMSTEPPER,OUTPUT);
-
   Serial.begin(9600);
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  // HIGH = CW, LOW = CCW
-  
-
+  //min 420
+  //total delaymicroseconds * k = time
   for(int i=0;i<20;i++){
 
-    digitalWrite(DRIVER_D,HIGH);
-    
+    digitalWrite(DRIVER_D,HIGH); // HIGH = CW, LOW = CCW
     int startt = millis();
-    
     for(int k=0;k<200;k++){
       digitalWrite(PWMSTEPPER,HIGH);
       delayMicroseconds(10000);
       digitalWrite(PWMSTEPPER,LOW);
       delayMicroseconds(10000);
-
 //      Serial.println(k);
     }
     
     int endd = millis() - startt;
     delay(1000);
-    
-    //min 420
-    //total delaymicroseconds * k = time
-
     Serial.print(endd);
-  
-    digitalWrite(DRIVER_D,LOW);
-  
+    digitalWrite(DRIVER_D,LOW); // HIGH = CW, LOW = CCW
     for(int k=0;k<200;k++){
       digitalWrite(PWMSTEPPER,HIGH);
       delayMicroseconds(10000);
       digitalWrite(PWMSTEPPER,LOW);
       delayMicroseconds(10000);
     }
-  
     delay(1000);
-
   }
-
   while(1){};
 }
